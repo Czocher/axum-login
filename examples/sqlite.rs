@@ -233,7 +233,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         .layer(HandleErrorLayer::new(|_: BoxError| async {
             StatusCode::BAD_REQUEST
         }))
-        .layer(AuthManagerLayer::new(backend, session_layer));
+        .layer(AuthManagerLayer::new(backend, "session", session_layer));
 
     let app = Router::new()
         .route("/", get(get_handlers::protected))
